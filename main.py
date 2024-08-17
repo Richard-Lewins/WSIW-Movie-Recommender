@@ -17,10 +17,7 @@ def main():
     model_knn = train_model_knn(user_movie_matrix, n_neighbors=10)
     
     # TODO: Add Evaluation
-    user_ratings = {'Toy Story (1995)': 5, 'Toy Story 2 (1999)': 5, 'Toy Story 3 (2010)': 5}
-    user_profile = build_user_profile(user_ratings, columns, user_movie_matrix)
-    print(user_profile)
-    print(get_movie_recommendations_by_profile(model_knn, user_profile, columns))
+    
     # Run interface
     run_interface(model_knn, user_movie_matrix, columns)
 
