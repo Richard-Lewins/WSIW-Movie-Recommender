@@ -2,7 +2,6 @@
 from src.data_loader import load_data
 from src.preprocess import merge_data, create_user_movie_matrix
 from src.model import train_model_knn
-from src.evaluation import evaluate_model
 from src.interface import run_interface
 from sklearn.model_selection import train_test_split
 
