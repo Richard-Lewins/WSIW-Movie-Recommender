@@ -14,15 +14,10 @@ def main():
     data = merge_data(movies, ratings)
     user_movie_matrix, columns, index = create_user_movie_matrix(data)
     
-    # Split data into training and testing sets
-    # train_data, test_data = train_test_split(data, test_size=0.2, random_state=42)
-    
     # Train model
     model_knn = train_model_knn(user_movie_matrix, n_neighbors=10)
     
-    # Evaluate model
-    # mse = evaluate_model(model_knn, user_movie_matrix, test_data, columns, index)
-    # print(f'RMSE: {mse}')
+    # TODO: Add Evaluation
     
     # Run interface
     run_interface(model_knn, user_movie_matrix, columns)
