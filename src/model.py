@@ -14,4 +14,6 @@ def get_movie_recommendations_by_name(model_knn, user_movie_matrix, movie_name, 
     return recommendations
 
 def get_movie_recommendations_by_profile(model_knn, user_profile, movie_titles, n_recommendations=5):
-    pass
+    distances, indices = model_knn.kneighbors(user_profile.reshape(1, -1), n_neighbors=n_recommendations + 1)
+    similar_movies = [movie_titles[indices.flatten()[i]] for i in range(1, len(indices.flatten()))]
+    return similar_movies
