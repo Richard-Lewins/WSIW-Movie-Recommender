@@ -15,7 +15,8 @@ def train_model_knn_users(user_movie_matrix, n_neighbors=10):
     model_knn.fit(user_movie_matrix)  # Fit on users
     return model_knn
 
-def get_movie_recommendations_by_name(movie_fit_knn, user_movie_matrix, movie_name, movie_titles, n_recommendations=5):
+# TODO, change to use movieId instead of movie title
+def get_movie_recommendations_by_movie(movie_fit_knn, user_movie_matrix, movie_name, movie_titles, n_recommendations=5):
     movie_index = movie_titles.get_loc(movie_name)
     if movie_index is None:
         return []
@@ -30,8 +31,6 @@ def get_movie_recommendations_by_profile(user_fit_knn, user_movie_matrix, user_p
     # Indices will be userID
     distances, indices = user_fit_knn.kneighbors(user_profile.reshape(1, -1), n_neighbors=10)
 
-    for i, index in enumerate(indices.flatten()):
-        print(f"User {i}: {index}")
     # Get the ratings of the similar users
     movie_ratings_similar_users = user_movie_matrix[indices.flatten()]
 

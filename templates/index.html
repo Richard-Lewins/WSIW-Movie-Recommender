@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Movie Recommendation System</h1>
+    <input type="text" id="search" placeholder="Search for a movie...">
+    <div id="suggestions"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#search').on('keyup', function() {
+                var query = $(this).val();
+                
+                // Update the URL without reloading the page
+                var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?q=' + query;
+                history.pushState({path: newUrl}, '', newUrl);
+                
+                $.getJSON('/search', { q: query }, function(data) {
+                    var suggestions = $('#suggestions');
+                    suggestions.empty();
+                    data.forEach(function(movie) {
+                        suggestions.append('<div><a href="/recommendations/' + movie.movieId + '">' + movie.title + '</a></div>');
+                    });
+                });
+            });
+
+            // If there is a query in the URL when the page loads, trigger the search
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('q')) {
+                var query = urlParams.get('q');
+                $('#search').val(query).trigger('keyup');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from src.model import get_movie_recommendations_by_name
+from src.model import get_movie_recommendations_by_movie
 from difflib import get_close_matches
 import re
 
@@ -40,7 +40,7 @@ def run_interface(model_knn, user_movie_matrix, movie_titles):
                 continue
 
         if user_input in movie_titles:
-            similar_movies = get_movie_recommendations_by_name(model_knn, user_movie_matrix, user_input, movie_titles)
+            similar_movies = get_movie_recommendations_by_movie(model_knn, user_movie_matrix, user_input, movie_titles)
             print(f"Movies similar to '{user_input}':")
             for movie in similar_movies:
                 print(movie)

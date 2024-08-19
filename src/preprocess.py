@@ -7,6 +7,8 @@ def merge_data(movies, ratings):
     return pd.merge(ratings, movies, on='movieId')
 
 def create_user_movie_matrix(data):
+    # Subtract 3 from each rating to make the ratings 0-indexed
+    data['rating'] = data['rating'] - 3
     user_movie_matrix = data.pivot_table(index='userId', columns='title', values='rating')
     return csr_matrix(user_movie_matrix.fillna(0)), user_movie_matrix.columns, user_movie_matrix.index
 

@@ -13,6 +13,7 @@ def main():
     # Preprocess data
     data = merge_data(movies, ratings)
     user_movie_matrix, columns, index = create_user_movie_matrix(data)
+    print(user_movie_matrix)
     
     # Train model
     movie_fit_knn = train_model_knn_movies(user_movie_matrix, n_neighbors=10)
@@ -21,7 +22,10 @@ def main():
     
     #Trying things
     user_fit_knn = train_model_knn_users(user_movie_matrix, n_neighbors=10)
-    user_profile = build_user_profile({'Jumanji (1995)': 5}, columns, user_movie_matrix)
+    # this user profile will be generic kids movie lover
+    ratings = {'Toy Story (1995)': -4}
+    user_profile = build_user_profile(ratings, columns, user_movie_matrix)
+    print(user_profile)
     print(get_movie_recommendations_by_profile(user_fit_knn, user_movie_matrix, user_profile, columns))
 
     # Run interface
