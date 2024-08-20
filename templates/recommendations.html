@@ -2,17 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommended Movies</title>
+    <link rel="stylesheet" href="../static/details.css">
 </head>
 <body>
-    <h1>Recommended Movies</h1>
-    <div id="recommendations">
-        {% for movie in movies %}
-            <div>
-                <h2>{{ movie.title }}</h2>
-                <!-- Add more movie details here -->
-            </div>
-        {% endfor %}
+    <div class="container">
+        <h1>Movie Details</h1>
+        <div class="movie-details">
+            <h2>{{ movie.title }}</h2>
+            <p>{{ movie.overview }}</p>
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        
+        <h1>Recommended Movies</h1>
+        <div id="recommendations" class="recommendations">
+            {% for movie in movies %}
+                <div class="movie-card">
+                    <h2>{{ movie.title }}</h2>
+                    <p>{{ movie.overview }}</p>
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

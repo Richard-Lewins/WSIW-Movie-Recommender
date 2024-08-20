@@ -1,22 +1,7 @@
 from src.model import get_movie_recommendations_by_movie
-from difflib import get_close_matches
-import re
+from src.preprocess import find_closest_movies
 
-def strip_year(movie_title):
-    """
-    Removes the year from a movie title, if present (As it might ruin comparisons)
-    """
-    return re.sub(r'\s*\(\d{4}\)$', '', movie_title)
 
-def find_closest_movies(movie_name, movie_titles, n=3, cutoff=0.4):
-    """
-    Finds the closest n matches to a movie name in a list of movie titles,
-    """
-    # Strip years from movie titles for comparison
-    movie_titles_without_year = [strip_year(title).lower() for title in movie_titles]
-    movie_name_lower = strip_year(movie_name).lower()
-    matches = get_close_matches(movie_name_lower, movie_titles_without_year, n=n, cutoff=cutoff)
-    return [movie_titles[movie_titles_without_year.index(match)] for match in matches]
 
 # TODO: Change this to be web based interface
 def run_interface(model_knn, user_movie_matrix, movie_titles):
